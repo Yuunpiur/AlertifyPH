@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alertify PH | Medical Info</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+
+  <!-- Reuse sign-up CSS for consistent design -->
+  <link rel="stylesheet" href="/CSS/sign-up.css" />
+</head>
+
+<body>
+  <div class="parent-container">
+    <h1>Medical Information</h1>
+
+    <!-- When submitted, this redirects to home.html -->
+    <form action="/HTML/home.html" method="GET" class="signup-form">
+      <input type="text" name="bloodType" placeholder="Blood Type (e.g., O+, A-)" required />
+      <input type="text" name="allergies" placeholder="Known Allergies (if any)" />
+      <input type="text" name="conditions" placeholder="Medical Conditions (e.g., Asthma, Heart Disease)" />
+      <input type="text" name="medications" placeholder="Current Medications (if any)" />
+
+      <div class="submit-section">
+        <button type="submit">Submit</button>
+        <p><a href="/HTML/sign-up.html">← Back</a></p>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

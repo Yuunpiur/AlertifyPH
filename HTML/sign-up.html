@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/CSS/sign-up.css">
-    <title>Alertify | Sign Up</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alertify PH | Sign Up</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/CSS/sign-up.css" />
 </head>
+
 <body>
-    <div class="full-name">full name</div>
-    <input type="text" placeholder="Enter your email address">
-    <input type="password" placeholder="Enter your password">
-    <input type="text" placeholder="Enter your unique watch ID">
-    <input type="text" placeholder="Enter your phone number">
-    <input type="text" placeholder="Enter your emergency contanct">
-    
+  <div class="parent-container">
+    <h1>Alertify PH</h1>
+    <form action="medical-info.html" method="GET" class="signup-form">
+      <div class="full-name">
+        <div class="name-group">
+          <input type="text" name="firstName" placeholder="First Name" required />
+          <input type="text" name="middleInitial" placeholder="M.I." maxlength="1" />
+          <input type="text" name="lastName" placeholder="Last Name" required />
+        </div>
+      </div>
+
+      <input type="email" name="email" placeholder="Email Address" required />
+      <input type="password" name="password" placeholder="Password" required minlength="8" />
+      <input type="text" name="watchID" placeholder="Unique Watch ID" required />
+      <input type="tel" name="phoneNumber" placeholder="Phone Number" required />
+
+      <div class="submit-section">
+        <button type="submit">Next</button>
+        <p>Already have an account? <a href="/HTML/log-in.html">Log in</a></p>
+      </div>
+    </form>
+  </div>
 </body>
 </html>

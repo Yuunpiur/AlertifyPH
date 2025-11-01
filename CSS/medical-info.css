@@ -63,18 +63,12 @@ h1 {
 .name-group {
   display: flex;
   gap: 0.5rem;
-  width: 450px;
+  width: 100%;
 }
 
 .name-group input {
   flex: 1;
 }
-/* Make middle initial box smaller */
-.name-group input[name="middleInitial"] {
-  flex: 0 0 60px; /* fixed small width */
-  text-align: center; /* center the single letter */
-}
-
 
 /* ===== INPUTS ===== */
 input {

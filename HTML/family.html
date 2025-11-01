@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alertify PH | Family Members</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/CSS/family.css" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="logo">Alertify PH</div>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="family.html" class="active">Family Members</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+
+  <main class="content">
+    <section class="family-section">
+      <h1>Family Members</h1>
+      <p>Add and manage your emergency contacts easily.</p>
+
+      <div class="family-list" id="familyList">
+        <!-- Added members appear here -->
+      </div>
+
+      <button class="add-btn" id="addBtn">
+        <span>+</span> Add Member
+      </button>
+    </section>
+  </main>
+
+  <!-- Popup Form -->
+  <div class="popup" id="popupForm">
+    <div class="popup-content">
+      <span class="close-btn" id="closeBtn">&times;</span>
+      <h2>Add Family Member</h2>
+      <form id="memberForm">
+        <input type="text" id="name" placeholder="Full Name" required />
+        <input type="text" id="relationship" placeholder="Relationship" required />
+        <input type="text" id="contact" placeholder="Contact Number" required />
+        <input type="text" id="alertifyId" placeholder="Alertify ID" required />
+        <button type="submit" class="cta">Add Member</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    const popupForm = document.getElementById('popupForm');
+    const closeBtn = document.getElementById('closeBtn');
+    const memberForm = document.getElementById('memberForm');
+    const familyList = document.getElementById('familyList');
+
+    addBtn.addEventListener('click', () => {
+      popupForm.classList.add('show');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      popupForm.classList.remove('show');
+    });
+
+    memberForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const relationship = document.getElementById('relationship').value;
+      const contact = document.getElementById('contact').value;
+      const alertifyId = document.getElementById('alertifyId').value;
+
+      const memberCard = document.createElement('div');
+      memberCard.classList.add('member-card');
+      memberCard.innerHTML = `
+        <h3>${name}</h3>
+        <p><strong>Relationship:</strong> ${relationship}</p>
+        <p><strong>Contact Number:</strong> ${contact}</p>
+        <p><strong>Alertify ID:</strong> ${alertifyId}</p>
+      `;
+
+      familyList.appendChild(memberCard);
+      memberForm.reset();
+      popupForm.classList.remove('show');
+    });
+  </script>
+</body>
+</html>

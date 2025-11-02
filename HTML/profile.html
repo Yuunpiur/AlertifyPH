@@ -13,6 +13,99 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="../CSS/profile.css" />
+    <style>
+    /* Dark background overlay */
+    .overlay {
+        position: fixed;
+        inset: 0;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.55);
+        z-index: 1000;
+        backdrop-filter: blur(4px);
+    }
+
+    /* Centered popup */
+    .edit-form {
+        background: #fff;
+        padding: 30px 90px;
+        border-radius: 20px;
+        width: 420px;
+        max-width: 95%;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        transform: translateY(0);
+        animation: slideUp 0.25s ease;
+    }
+
+    @keyframes slideUp {
+        from {
+        transform: translateY(20px);
+        opacity: 0;
+        }
+
+        to {
+        transform: translateY(0);
+        opacity: 1;
+        }
+    }
+
+    .edit-form h2 {
+        text-align: center;
+        color: #e53935;
+        margin-bottom: 18px;
+        font-weight: 700;
+    }
+
+    .edit-form label {
+        display: block;
+        margin-top: 10px;
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: #333;
+    }
+
+    .edit-form input {
+        width: 100%;
+        padding: 9px 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 0.9rem;
+    }
+
+    .form-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px;
+        gap: 10px;
+    }
+
+    .form-buttons button {
+        flex: 1;
+        padding: 10px 0;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        color: white;
+        transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .save-btn {
+        background: linear-gradient(135deg, #e53935, #ff5f5f);
+    }
+
+    .cancel-btn {
+        background: #9e9e9e;
+    }
+
+    .form-buttons button:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+    </style>
+
 </head>
 
 <body>
@@ -62,36 +155,97 @@
         </div>
       </div>
 
-      <button class="cta" onclick="editProfile()">Edit Info</button>
+      <button class="cta" id="editProfileBtn">Edit Info</button>
     </section>
   </main>
 
+  <!-- Popup edit form -->
+  <div class="overlay" id="editOverlay">
+    <div class="edit-form">
+      <h2>Edit Profile</h2>
+      <form id="editForm">
+        <label>First Name:</label>
+        <input type="text" id="editFname" required>
+
+        <label>Middle Initial:</label>
+        <input type="text" id="editMname">
+
+        <label>Last Name:</label>
+        <input type="text" id="editLname" required>
+
+        <label>Email:</label>
+        <input type="email" id="editEmail" required>
+
+        <label>Phone Number:</label>
+        <input type="text" id="editPhone" required>
+
+        <label>Watch ID:</label>
+        <input type="text" id="editWatchID" required>
+
+        <div class="form-buttons">
+          <button type="submit" class="save-btn">Save</button>
+          <button type="button" class="cancel-btn" id="cancelEdit">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
-    // Retrieve user info from localStorage
-    const userData = JSON.parse(localStorage.getItem("userInfo"));
+    const userData = JSON.parse(localStorage.getItem("userInfo")) || {};
 
-    if (userData) {
-      // Optional: generate a simple user ID if not stored
-      const userId = "ALTPH-" + Math.floor(100000 + Math.random() * 900000);
+    // Generate or reuse ID
+    if (!userData.userID) {
+      userData.userID = "ALTPH-" + Math.floor(100000 + Math.random() * 900000);
+      localStorage.setItem("userInfo", JSON.stringify(userData));
+    }
 
-      // Fill in the profile fields
-      document.getElementById("userID").textContent = userId;
+    // Display info
+    function displayInfo() {
+      document.getElementById("userID").textContent = userData.userID;
       document.getElementById("fname").textContent = userData.firstName || "N/A";
       document.getElementById("mname").textContent = userData.middleInitial || "N/A";
       document.getElementById("lname").textContent = userData.lastName || "N/A";
       document.getElementById("email").textContent = userData.email || "N/A";
       document.getElementById("phone").textContent = userData.phoneNumber || "N/A";
       document.getElementById("watchid").textContent = userData.watchID || "N/A";
-    } else {
-      // If no user data found
-      document.getElementById("profile-card").innerHTML = `
-        <p>No user data found. Please <a href="sign-up.html">sign up</a> first.</p>
-      `;
     }
 
-    function editProfile() {
-      window.location.href = "sign-up.html";
-    }
+    displayInfo();
+
+    const editOverlay = document.getElementById("editOverlay");
+    const editForm = document.getElementById("editForm");
+
+    // Open popup and prefill fields
+    document.getElementById("editProfileBtn").addEventListener("click", () => {
+      editOverlay.style.display = "flex";
+      document.getElementById("editFname").value = userData.firstName || "";
+      document.getElementById("editMname").value = userData.middleInitial || "";
+      document.getElementById("editLname").value = userData.lastName || "";
+      document.getElementById("editEmail").value = userData.email || "";
+      document.getElementById("editPhone").value = userData.phoneNumber || "";
+      document.getElementById("editWatchID").value = userData.watchID || "";
+    });
+
+    // Close popup
+    document.getElementById("cancelEdit").addEventListener("click", () => {
+      editOverlay.style.display = "none";
+    });
+
+    // Save edited info
+    editForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      userData.firstName = document.getElementById("editFname").value;
+      userData.middleInitial = document.getElementById("editMname").value;
+      userData.lastName = document.getElementById("editLname").value;
+      userData.email = document.getElementById("editEmail").value;
+      userData.phoneNumber = document.getElementById("editPhone").value;
+      userData.watchID = document.getElementById("editWatchID").value;
+
+      localStorage.setItem("userInfo", JSON.stringify(userData));
+      displayInfo();
+      editOverlay.style.display = "none";
+    });
   </script>
 </body>
+
 </html>

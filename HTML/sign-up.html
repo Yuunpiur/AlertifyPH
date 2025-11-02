@@ -11,31 +11,53 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/CSS/sign-up.css" />
+  <link rel="stylesheet" href="../CSS/sign-up.css" />
 </head>
 
 <body>
   <div class="parent-container">
     <h1>Alertify PH</h1>
-    <form action="medical-info.html" method="GET" class="signup-form">
+    <form id="signupForm" class="signup-form">
       <div class="full-name">
         <div class="name-group">
-          <input type="text" name="firstName" placeholder="First Name" required />
-          <input type="text" name="middleInitial" placeholder="M.I." maxlength="1" />
-          <input type="text" name="lastName" placeholder="Last Name" required />
+          <input type="text" id="firstName" placeholder="First Name" required />
+          <input type="text" id="middleInitial" placeholder="M.I." maxlength="1" />
+          <input type="text" id="lastName" placeholder="Last Name" required />
         </div>
       </div>
 
-      <input type="email" name="email" placeholder="Email Address" required />
-      <input type="password" name="password" placeholder="Password" required minlength="8" />
-      <input type="text" name="watchID" placeholder="Unique Watch ID" required />
-      <input type="tel" name="phoneNumber" placeholder="Phone Number" required />
+      <input type="email" id="email" placeholder="Email Address" required />
+      <input type="password" id="password" placeholder="Password" required minlength="8" />
+      <input type="text" id="watchID" placeholder="Unique Watch ID" required />
+      <input type="tel" id="phoneNumber" placeholder="Phone Number" required />
 
       <div class="submit-section">
         <button type="submit">Next</button>
-        <p>Already have an account? <a href="/HTML/log-in.html">Log in</a></p>
+        <p>Already have an account? <a href="log-in.html">Log in</a></p>
       </div>
     </form>
   </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Save user info to localStorage (optional, for later use)
+      const userInfo = {
+        firstName: document.getElementById("firstName").value,
+        middleInitial: document.getElementById("middleInitial").value,
+        lastName: document.getElementById("lastName").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        watchID: document.getElementById("watchID").value,
+        phoneNumber: document.getElementById("phoneNumber").value,
+      };
+
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+
+      // Redirect to medical-info.html next
+      window.location.href = "medical-info.html";
+    });
+  </script>
 </body>
 </html>

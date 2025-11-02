@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alertify PH | Medical Info</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../CSS/navbar.css">
+  <link rel="stylesheet" href="../CSS/medical-info.css" />
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">Alertify PH</div>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="family.html">Family Members</a></li>
+      <li><a href="medical.html" class="active">Medical</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="parent-container">
+    <h1>Your Medical Information</h1>
+
+    <div id="medical-display" class="signup-form">
+      <p><strong>Height:</strong> <span id="height"></span></p>
+      <p><strong>Weight:</strong> <span id="weight"></span></p>
+      <p><strong>Blood Type:</strong> <span id="bloodType"></span></p>
+      <p><strong>Allergies:</strong> <span id="allergies"></span></p>
+      <p><strong>Conditions:</strong> <span id="conditions"></span></p>
+      <p><strong>Medications:</strong> <span id="medications"></span></p>
+      <p><strong>Emergency Contact:</strong> <span id="emergencyContactName"></span> - <span id="emergencyContactNumber"></span></p>
+    </div>
+
+    <div class="edit-link">
+      <p><a href="medical-info.html">Edit Medical Info →</a></p>
+    </div>
+  </div>
+
+  <!-- JS: Load Medical Info -->
+  <script>
+    const data = JSON.parse(localStorage.getItem('medicalInfo'));
+
+    if (data) {
+      for (const key in data) {
+        const el = document.getElementById(key);
+        if (el) el.textContent = data[key] || 'N/A';
+      }
+    } else {
+      document.getElementById('medical-display').innerHTML =
+        '<p>No medical information found. Please fill out the form first.</p><p><a href="medical-info.html">Go to Medical Form →</a></p>';
+    }
+  </script>
+</body>
+</html>

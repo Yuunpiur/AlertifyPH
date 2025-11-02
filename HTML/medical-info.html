@@ -10,26 +10,60 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
 
-  <!-- Reuse sign-up CSS for consistent design -->
-  <link rel="stylesheet" href="/CSS/sign-up.css" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="../CSS/medical-info.css" />
 </head>
 
 <body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">Alertify PH</div>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="family.html">Family Members</a></li>
+      <li><a href="medical.html" class="active">Medical</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+
   <div class="parent-container">
-    <h1>Medical Information</h1>
+    <h1>Complete Your Medical Information</h1>
 
-    <!-- When submitted, this redirects to home.html -->
-    <form action="/HTML/home.html" method="GET" class="signup-form">
-      <input type="text" name="bloodType" placeholder="Blood Type (e.g., O+, A-)" required />
-      <input type="text" name="allergies" placeholder="Known Allergies (if any)" />
-      <input type="text" name="conditions" placeholder="Medical Conditions (e.g., Asthma, Heart Disease)" />
-      <input type="text" name="medications" placeholder="Current Medications (if any)" />
+    <form id="medicalForm" class="signup-form">
+      <input type="text" id="height" placeholder="Height (cm)" required />
+      <input type="text" id="weight" placeholder="Weight (kg)" required />
+      <input type="text" id="bloodType" placeholder="Blood Type" required />
+      <input type="text" id="allergies" placeholder="Allergies" />
+      <input type="text" id="conditions" placeholder="Existing Conditions" />
+      <input type="text" id="medications" placeholder="Medications" />
+      <input type="text" id="emergencyContactName" placeholder="Emergency Contact Name" required />
+      <input type="text" id="emergencyContactNumber" placeholder="Emergency Contact Number" required />
 
-      <div class="submit-section">
-        <button type="submit">Submit</button>
-        <p><a href="/HTML/sign-up.html">← Back</a></p>
-      </div>
+      <button type="submit" class="cta">Save & Go to Home</button>
     </form>
   </div>
+
+  <script>
+    document.getElementById("medicalForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const medicalInfo = {
+        height: document.getElementById("height").value,
+        weight: document.getElementById("weight").value,
+        bloodType: document.getElementById("bloodType").value,
+        allergies: document.getElementById("allergies").value,
+        conditions: document.getElementById("conditions").value,
+        medications: document.getElementById("medications").value,
+        emergencyContactName: document.getElementById("emergencyContactName").value,
+        emergencyContactNumber: document.getElementById("emergencyContactNumber").value,
+      };
+
+      localStorage.setItem("medicalInfo", JSON.stringify(medicalInfo));
+
+      // ✅ Redirect to home page instead of medical.html
+      window.location.href = "home.html";
+    });
+  </script>
 </body>
+
 </html>

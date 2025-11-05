@@ -58,6 +58,72 @@ h1 {
   outline: none;
 }
 
+/* ===== DNR SECTION ===== */
+.dnr-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffeaea;
+  border: 1.5px solid #ffcccc;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  color: #111;
+  position: relative;
+}
+
+.dnr-container label {
+  font-weight: 500;
+  color: #ff4d4d;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dnr-container input[type="checkbox"] {
+  accent-color: #ff4d4d;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* Tooltip styles */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: 700;
+  color: #ff4d4d;
+  border: 1px solid #ff4d4d;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 17px;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: 230px;
+  background-color: #fff;
+  color: #111;
+  text-align: left;
+  border-radius: 8px;
+  padding: 0.75rem;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-size: 0.85rem;
+  line-height: 1.2rem;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}
+
 /* ===== BUTTON ===== */
 .signup-form .cta {
   background-color: #ff4d4d;
@@ -74,6 +140,4 @@ h1 {
 }
 
 .signup-form .cta:hover {
-  background-color: #e03e3e;
-  box-shadow: 0 4px 15px rgba(255, 77, 77, 0.4);
-}
+  b

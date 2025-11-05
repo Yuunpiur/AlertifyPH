@@ -181,6 +181,24 @@ h1 {
   outline: none;
 }
 
+/* DNR specific styling inside modal */
+.dnr-field {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.35rem;
+}
+
+.dnr-field input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+.small {
+  font-size: 0.95rem;
+  color: #333;
+}
+
 /* ===== MODAL BUTTONS ===== */
 .modal-actions {
   display: flex;

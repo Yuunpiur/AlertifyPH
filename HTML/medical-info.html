@@ -28,6 +28,20 @@
       <input type="text" id="emergencyContactName" placeholder="Emergency Contact Name" required />
       <input type="text" id="emergencyContactNumber" placeholder="Emergency Contact Number" required />
 
+      <!-- DNR Section -->
+      <div class="dnr-container">
+        <label for="dnr">
+          Do Not Resuscitate (DNR)
+          <span class="tooltip">?
+            <span class="tooltip-text">
+              A DNR (Do Not Resuscitate) indicates that you do not wish to receive CPR
+              or advanced life-saving measures if your heart or breathing stops.
+            </span>
+          </span>
+        </label>
+        <input type="checkbox" id="dnr" />
+      </div>
+
       <button type="submit" class="cta">Save & Go to Home</button>
     </form>
   </div>
@@ -45,14 +59,14 @@
         medications: document.getElementById("medications").value,
         emergencyContactName: document.getElementById("emergencyContactName").value,
         emergencyContactNumber: document.getElementById("emergencyContactNumber").value,
+        dnr: document.getElementById("dnr").checked,
       };
 
       localStorage.setItem("medicalInfo", JSON.stringify(medicalInfo));
 
-      // ✅ Redirect to home page instead of medical.html
+      // ✅ Redirect to home page
       window.location.href = "home.html";
     });
   </script>
 </body>
-
 </html>

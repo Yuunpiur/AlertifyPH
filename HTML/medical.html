@@ -32,6 +32,7 @@
       <p><strong>Conditions:</strong> <span id="conditions"></span></p>
       <p><strong>Medications:</strong> <span id="medications"></span></p>
       <p><strong>Emergency Contact:</strong> <span id="emergencyContactName"></span> - <span id="emergencyContactNumber"></span></p>
+  <p><strong>DNR (Do Not Resuscitate):</strong> <span id="dnr"></span></p>
     </div>
 
     <div class="edit-button">
@@ -74,8 +75,15 @@
             <input type="text" id="editEmergencyContactName" />
           </div>
           <div class="field-group">
-            <label>Emergency Contact Number</label>
+            <label>Emergency Cosntact Number</label>
             <input type="text" id="editEmergencyContactNumber" />
+          </div>
+          <div class="field-group">
+            <label>DNR</label>
+            <div class="dnr-field">
+              <input type="checkbox" id="editDnr" />
+              <label for="editDnr" class="small">Do Not Resuscitate</label>
+            </div>
           </div>
         </div>
 
@@ -87,12 +95,14 @@
     </div>
   </div>
 
-  <script>
+    <script>
     const data = JSON.parse(localStorage.getItem('medicalInfo'));
     if (data) {
       for (const key in data) {
         const el = document.getElementById(key);
-        if (el) el.textContent = data[key] || 'N/A';
+        if (!el) continue;
+        if (key === 'dnr') el.textContent = data[key] ? 'Yes' : 'No';
+        else el.textContent = data[key] || 'N/A';
       }
     }
 
@@ -112,6 +122,7 @@
         document.getElementById('editMedications').value = data.medications || '';
         document.getElementById('editEmergencyContactName').value = data.emergencyContactName || '';
         document.getElementById('editEmergencyContactNumber').value = data.emergencyContactNumber || '';
+        document.getElementById('editDnr').checked = !!data.dnr;
       }
     };
 
@@ -127,7 +138,8 @@
         conditions: document.getElementById('editConditions').value,
         medications: document.getElementById('editMedications').value,
         emergencyContactName: document.getElementById('editEmergencyContactName').value,
-        emergencyContactNumber: document.getElementById('editEmergencyContactNumber').value
+        emergencyContactNumber: document.getElementById('editEmergencyContactNumber').value,
+        dnr: document.getElementById('editDnr').checked
       };
       localStorage.setItem('medicalInfo', JSON.stringify(updatedData));
       location.reload();
